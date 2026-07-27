@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: pdf-summarizer-backend
+    ports:
+      - "8000:8000"
+    environment:
+      - PROJECT_NAME=PDF Summarizer API
+      - API_V1_STR=/api/v1
+      - CORS_ORIGINS=["http://localhost:5173", "http://localhost:3000", "http://localhost:80"]
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - GEMINI_MODEL=gemini-2.5-flash
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: pdf-summarizer-frontend
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
+    restart: unless-stopped

@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: pdf-summarizer-backend
+    env: python
+    region: oregon
+    buildCommand: "pip install -r backend/requirements.txt"
+    startCommand: "cd backend && uvicorn app.main:app --host 0.0.0.0 --port $PORT"
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.3
+      - key: PROJECT_NAME
+        value: "PDF Summarizer API"
+      - key: API_V1_STR
+        value: "/api/v1"
+      - key: CORS_ORIGINS
+        value: '["https://pdf-summarizer.vercel.app", "http://localhost:5173"]'
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: GEMINI_MODEL
+        value: "gemini-2.5-flash"

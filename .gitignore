@@ -1,0 +1,25 @@
+# Python / FastAPI
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.venv/
+env/
+venv/
+ENV/
+*.env
+!.env.example
+
+# Node / React
+node_modules/
+dist/
+build/
+.npm
+*.log
+local.properties
+
+# IDE & OS
+.vscode/
+.idea/
+.DS_Store
+*.swp
